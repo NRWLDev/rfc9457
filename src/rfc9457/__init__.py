@@ -1,4 +1,3 @@
-
 """Implement RFC9547 compatible exceptions.
 
 https://www.rfc-editor.org/rfc/rfc9457.html
