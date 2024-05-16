@@ -11,6 +11,12 @@ import typing as t
 CONVERT_RE = re.compile(r"(?<!^)(?=[A-Z])")
 
 
+def error_class_to_type(exc: Exception) -> str:
+    """Convert an exception class name to a `problem-type` string."""
+    type_ = "".join(exc.__class__.__name__.rsplit("Error", 1))
+    return CONVERT_RE.sub("-", type_).lower()
+
+
 class Problem(Exception):  # noqa: N818
     """
     A base exception designed to support all API error handling.
@@ -35,8 +41,7 @@ class Problem(Exception):  # noqa: N818
 
     @property
     def type(self: t.Self) -> str:
-        type_ = "".join(self.__class__.__name__.rsplit("Error", 1))
-        type_ = CONVERT_RE.sub("-", type_).lower()
+        type_ = error_class_to_type(self)
         return self._type if self._type else type_
 
     def marshal(self: t.Self, *, strip_debug: bool = False) -> dict[str, t.Any]:
