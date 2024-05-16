@@ -24,6 +24,8 @@ class Problem(Exception):  # noqa: N818
     this will allow all apps and libraries to maintain a common exception chain.
     """
 
+    __mandatory__ = ("type", "title", "status")
+
     def __init__(
         self: t.Self,
         title: str,
@@ -64,7 +66,7 @@ class Problem(Exception):  # noqa: N818
             ret[k] = v
 
         if strip_debug:
-            ret = {k: v for k, v in ret.items() if k in ["type", "title", "status"]}
+            ret = {k: v for k, v in ret.items() if k in self.__mandatory__}
 
         return ret
 
