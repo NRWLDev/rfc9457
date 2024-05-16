@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.3 - 2024-05-16
+
+### Bug fixes
+
+- Provide overridable cls tuple `__mandatory__` to determine which keys get kept when stripping debug. [[a339dbc](https://github.com/NRWLDev/rfc9457/commit/a339dbc882e2ebc467728444933f9e33999684a3)]
+
 ## v0.0.2 - 2024-05-16
 
 ### Bug fixes
