@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.2 - 2024-05-16
+
+### Bug fixes
+
+- Extract error to type helper function from class. [[f4b1605](https://github.com/NRWLDev/rfc9457/commit/f4b160543c9e13ed2bcfdd5411dc3492d3b4b63e)]
+
 ## v0.0.1 - 2024-05-16
 
 ### Features and Improvements
