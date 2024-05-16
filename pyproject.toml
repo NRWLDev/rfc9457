@@ -44,7 +44,6 @@ issue_link = "https://github.com/NRWLDev/rfc9457/issues/::issue_ref::"
 commit_link = "https://github.com/NRWLDev/rfc9457/commit/::commit_hash::"
 
 [tool.pytest.ini_options]
-asyncio_mode = "auto"
 testpaths = ["tests"]
 addopts = "--random-order"
 markers = [

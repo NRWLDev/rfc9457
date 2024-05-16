@@ -37,3 +37,25 @@ def test_marshal(exc, type_):
         "details": "details",
         "status": e.status,
     }
+
+
+def test_marshal_with_extras():
+    e = NotFoundError(key1="value1", key2=["value2", "value3"])
+
+    assert e.marshal() == {
+        "type": "not-found",
+        "title": "a 404 message",
+        "status": 404,
+        "key1": "value1",
+        "key2": ["value2", "value3"],
+    }
+
+
+def test_marshal_strip_debug():
+    e = NotFoundError(details="details", key1="value1", key2=["value2", "value3"])
+
+    assert e.marshal(strip_debug=True) == {
+        "type": "not-found",
+        "title": "a 404 message",
+        "status": 404,
+    }
