@@ -7,7 +7,6 @@ from __future__ import annotations
 
 import re
 import typing as t
-from warnings import warn
 
 CONVERT_RE = re.compile(r"(?<!^)(?=[A-Z])")
 
