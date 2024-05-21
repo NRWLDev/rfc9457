@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.5 - 2024-05-21
+
+### Bug fixes
+
+- Don't call super, end the chain at Problem base class. [[c2c63c4](https://github.com/NRWLDev/rfc9457/commit/c2c63c45538c41cd7c835ae7129feb6465b669d3)]
+
 ## v0.0.4 - 2024-05-17
 
 ### Bug fixes
