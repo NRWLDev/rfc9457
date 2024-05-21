@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.4 - 2024-05-17
+
+### Bug fixes
+
+- Store status as status_code attribute to work around sentry implementation for sentry_sdk.
+
 ## v0.0.3 - 2024-05-16
 
 ### Bug fixes

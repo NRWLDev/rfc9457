@@ -38,6 +38,7 @@ class Problem(Exception):  # noqa: N818
         self.title = title
         self.details = details
         self.status = status
+        self.status_code = status  # work around for sentry integrations that expect status_code attr
         self.extras = kwargs
 
     def __str__(self: t.Self) -> str:
