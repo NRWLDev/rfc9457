@@ -39,6 +39,21 @@ def test_marshal(exc, type_):
     }
 
 
+@pytest.mark.parametrize(
+    "exc",
+    [
+        NotFoundError,
+        InvalidAuthError,
+        BadRequestError,
+        ServerExceptionError,
+    ],
+)
+def test_str(exc):
+    e = exc("details")
+
+    assert str(e) == f"{e.title}: details"
+
+
 def test_marshal_with_extras():
     e = NotFoundError(key1="value1", key2=["value2", "value3"])
 

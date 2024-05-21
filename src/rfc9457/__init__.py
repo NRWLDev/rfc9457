@@ -34,12 +34,14 @@ class Problem(Exception):  # noqa: N818
         status: int = 500,
         **kwargs,
     ) -> None:
-        super().__init__(title)
         self._type = type_
         self.title = title
         self.details = details
         self.status = status
         self.extras = kwargs
+
+    def __str__(self: t.Self) -> str:
+        return f"{self.title}: {self.details}"
 
     @property
     def type(self: t.Self) -> str:
