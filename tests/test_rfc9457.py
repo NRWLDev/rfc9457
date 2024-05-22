@@ -51,7 +51,22 @@ def test_marshal(exc, type_):
 def test_str(exc):
     e = exc("details")
 
-    assert str(e) == f"{e.title}: details"
+    assert str(e) == e.title
+
+
+@pytest.mark.parametrize(
+    "exc",
+    [
+        NotFoundError,
+        InvalidAuthError,
+        BadRequestError,
+        ServerExceptionError,
+    ],
+)
+def test_repr(exc):
+    e = exc("details")
+
+    assert repr(e) == f"{exc.__name__}<title={e.title}; details=details>"
 
 
 def test_marshal_with_extras():

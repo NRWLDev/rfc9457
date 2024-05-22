@@ -42,7 +42,10 @@ class Problem(Exception):  # noqa: N818
         self.extras = kwargs
 
     def __str__(self: t.Self) -> str:
-        return f"{self.title}: {self.details}"
+        return self.title
+
+    def __repr__(self: t.Self) -> str:
+        return f"{self.__class__.__name__}<title={self.title}; details={self.details}>"
 
     @property
     def type(self: t.Self) -> str:
