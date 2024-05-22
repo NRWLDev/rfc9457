@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.6 - 2024-05-22
+
+### Bug fixes
+
+- Revert to old __str__ method, and introduce __repr__ including details [[e7b7c24](https://github.com/NRWLDev/rfc9457/commit/e7b7c247652acd6e46fe87207e610e4f1d518146)]
+
 ## v0.0.5 - 2024-05-21
 
 ### Bug fixes
