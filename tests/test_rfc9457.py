@@ -1,3 +1,5 @@
+import typing
+
 import pytest
 
 import rfc9457 as error
@@ -89,3 +91,31 @@ def test_marshal_strip_debug():
         "title": "a 404 message",
         "status": 404,
     }
+
+
+class HeaderError(error.BadRequestProblem):
+    headers: typing.ClassVar = {"header1": "value1"}
+
+
+def test_pass_in_headers():
+    e = NotFoundError(details="details", headers={"header1": "value1", "header2": "value2"})
+
+    assert e.headers == {"header1": "value1", "header2": "value2"}
+
+
+def test_builtin_headers():
+    e = HeaderError(details="details")
+
+    assert e.headers == {"header1": "value1"}
+
+
+def test_augment_headers():
+    e = HeaderError(details="details", headers={"header2": "value2"})
+
+    assert e.headers == {"header1": "value1", "header2": "value2"}
+
+
+def test_replace_headers():
+    e = HeaderError(details="details", headers={"header1": "value2"})
+
+    assert e.headers == {"header1": "value2"}

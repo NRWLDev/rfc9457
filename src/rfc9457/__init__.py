@@ -26,12 +26,13 @@ class Problem(Exception):  # noqa: N818
 
     __mandatory__ = ("type", "title", "status")
 
-    def __init__(
+    def __init__(  # noqa: PLR0913
         self: t.Self,
         title: str,
         type_: str | None = None,
         details: str | None = None,
         status: int = 500,
+        headers: dict[str, str] | None = None,
         **kwargs,
     ) -> None:
         self._type = type_
@@ -39,6 +40,7 @@ class Problem(Exception):  # noqa: N818
         self.details = details
         self.status = status
         self.status_code = status  # work around for sentry integrations that expect status_code attr
+        self.headers = headers
         self.extras = kwargs
 
     def __str__(self: t.Self) -> str:
@@ -78,13 +80,25 @@ class Problem(Exception):  # noqa: N818
 
 
 class StatusProblem(Problem):
-    code = None
-    type_ = None
-    title = "Base http exception."
-    status = 500
+    code: str | None = None
+    type_: str | None = None
+    title: str = "Base http exception."
+    status: int = 500
+    headers: dict[str, str] | None = None
 
-    def __init__(self: t.Self, details: str | None = None, **kwargs) -> None:
-        super().__init__(self.title, type_=self.type_ or self.code, details=details, status=self.status, **kwargs)
+    def __init__(self: t.Self, details: str | None = None, headers: dict[str, str] | None = None, **kwargs) -> None:
+        headers_ = (self.headers or {}).copy()
+        if headers:
+            headers_.update(headers)
+
+        super().__init__(
+            self.title,
+            type_=self.type_ or self.code,
+            details=details,
+            status=self.status,
+            headers=headers_ or None,
+            **kwargs,
+        )
 
 
 class ServerProblem(StatusProblem): ...
