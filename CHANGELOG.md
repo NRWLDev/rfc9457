@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.7 - 2024-05-23
+
+### Features and Improvements
+
+- Support headers as a first class attribute. [[#1](https://github.com/NRWLDev/rfc9457/issues/1)] [[a6e1bc2](https://github.com/NRWLDev/rfc9457/commit/a6e1bc245c884ff5ab0d40b821bab94b107cc9ca)]
+
 ## v0.0.6 - 2024-05-22
 
 ### Bug fixes
