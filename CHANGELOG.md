@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.8 - 2024-05-24
+
+### Bug fixes
+
+- Add in py.typed file so mypy/pyright acknowledge type hints. [[#4](https://github.com/NRWLDev/rfc9457/issues/4)] [[8ce87c1](https://github.com/NRWLDev/rfc9457/commit/8ce87c14f37d28e830b8a9e4c3c5092148fe2a4a)]
+
 ## v0.0.7 - 2024-05-23
 
 ### Features and Improvements
