@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.10 - 2024-05-31
+
+### Features and Improvements
+
+- Add support for type base urls on marshal. [[#6](https://github.com/NRWLDev/rfc9457/issues/6)] [[8b50ee0](https://github.com/NRWLDev/rfc9457/commit/8b50ee02c5b8bde6aee96c5d6e7ccf580fca04d7)]
+
 ## v0.0.9 - 2024-05-31
 
 ### Features and Improvements
