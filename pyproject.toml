@@ -10,7 +10,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-multidict = "^6.0.5"
+multidict = "*"
 
 [tool.poetry.dev-dependencies]
 
