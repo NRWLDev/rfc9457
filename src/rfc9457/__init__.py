@@ -8,6 +8,8 @@ from __future__ import annotations
 import re
 import typing as t
 
+from multidict import CIMultiDict
+
 CONVERT_RE = re.compile(r"(?<!^)(?=[A-Z])")
 
 
@@ -32,7 +34,7 @@ class Problem(Exception):  # noqa: N818
         type_: str | None = None,
         details: str | None = None,
         status: int = 500,
-        headers: dict[str, str] | None = None,
+        headers: CIMultiDict[str, str] | None = None,
         **kwargs,
     ) -> None:
         self._type = type_
@@ -84,9 +86,14 @@ class StatusProblem(Problem):
     type_: str | None = None
     title: str = "Base http exception."
     status: int = 500
-    headers: dict[str, str] | None = None
+    headers: CIMultiDict[str, str] | None = None
 
-    def __init__(self: t.Self, details: str | None = None, headers: dict[str, str] | None = None, **kwargs) -> None:
+    def __init__(
+        self: t.Self,
+        details: str | None = None,
+        headers: CIMultiDict[str, str] | None = None,
+        **kwargs,
+    ) -> None:
         headers_ = (self.headers or {}).copy()
         if headers:
             headers_.update(headers)
@@ -102,6 +109,21 @@ class StatusProblem(Problem):
 
 
 class ServerProblem(StatusProblem): ...
+
+
+class RedirectProblem(StatusProblem):
+    status = 301
+
+    def __init__(
+        self: t.Self,
+        location: str,
+        details: str | None = None,
+        headers: CIMultiDict[str, str] | None = None,
+        **kwargs,
+    ) -> None:
+        headers_ = CIMultiDict(Location=location)
+        headers_.update(headers or {})
+        super().__init__(details=details, headers=headers_, **kwargs)
 
 
 class BadRequestProblem(StatusProblem):
