@@ -1,6 +1,7 @@
 import typing
 
 import pytest
+from multidict import CIMultiDict
 
 import rfc9457 as error
 
@@ -119,3 +120,21 @@ def test_replace_headers():
     e = HeaderError(details="details", headers={"header1": "value2"})
 
     assert e.headers == {"header1": "value2"}
+
+
+def test_redirect_location():
+    class CustomRedirect(error.RedirectProblem):
+        title = "Moved"
+
+    e = CustomRedirect("new-location", "details")
+
+    assert e.headers == CIMultiDict(Location="new-location")
+
+
+def test_redirect_location_headers_override():
+    class CustomRedirect(error.RedirectProblem):
+        title = "Moved"
+
+    e = CustomRedirect("new-location", "details", headers={"location": "my-location"})
+
+    assert e.headers == CIMultiDict(location="my-location")
