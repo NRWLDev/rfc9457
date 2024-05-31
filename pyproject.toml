@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "rfc9457"
-version = "0.0.8"
+version = "0.0.9"
 description = "Implementation of RFC9457 problems."
 authors = ["Daniel Edgecombe <daniel@nrwl.co>"]
 license = "Apache-2.0"
@@ -24,7 +24,7 @@ ruff = "^0.3"
 pre-commit = "^3.0.2"
 
 [tool.bumpversion]
-current_version = "0.0.8"
+current_version = "0.0.9"
 commit = true
 tag = true
 
