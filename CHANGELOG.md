@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.9 - 2024-05-31
+
+### Features and Improvements
+
+- Add support for Redirect base class with explicit location argument. [[#3](https://github.com/NRWLDev/rfc9457/issues/3)] [[e805089](https://github.com/NRWLDev/rfc9457/commit/e80508967109c216a17b1bb17b91c9d0dce581d2)]
+
 ## v0.0.8 - 2024-05-24
 
 ### Bug fixes
