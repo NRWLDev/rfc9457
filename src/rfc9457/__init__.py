@@ -56,15 +56,17 @@ class Problem(Exception):  # noqa: N818
         type_ = error_class_to_type(self)
         return self._type if self._type else type_
 
-    def marshal(self: t.Self, *, strip_debug: bool = False) -> dict[str, t.Any]:
+    def marshal(self: t.Self, type_base_url: str | None = None, *, strip_debug: bool = False) -> dict[str, t.Any]:
         """Generate a JSON compatible representation.
 
         Args:
         ----
+            type_base_url: If provided prepend to the type to generate a full url.
             strip_debug: If true, remove anything that is not title/type.
         """
+        type_ = f"{type_base_url or ''}{self.type}"
         ret = {
-            "type": self.type,
+            "type": type_,
             "title": self.title,
             "status": self.status,
         }

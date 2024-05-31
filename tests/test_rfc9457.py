@@ -42,6 +42,17 @@ def test_marshal(exc, type_):
     }
 
 
+def test_marshal_with_base_url():
+    e = NotFoundError("details")
+
+    assert e.marshal(type_base_url="https://my-docs/errors/") == {
+        "type": "https://my-docs/errors/not-found",
+        "title": "a 404 message",
+        "details": "details",
+        "status": 404,
+    }
+
+
 @pytest.mark.parametrize(
     "exc",
     [
