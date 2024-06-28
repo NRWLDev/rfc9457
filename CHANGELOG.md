@@ -2,6 +2,8 @@
 
 ## v0.0.11 - 2024-06-28
 
+- Update README with details of libraries making use of code.
+
 ## v0.0.10 - 2024-05-31
 
 ### Features and Improvements
