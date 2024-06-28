@@ -13,6 +13,11 @@ Each exception easily marshals to JSON based on the
 [RFC9457](https://www.rfc-editor.org/rfc/rfc9457.html) spec for use in api
 errors.
 
+This library is currently used to support problem details in both Starlette and FastAPI.
+
+[starlette-problem](https://pypi.org/project/starlette-problem)
+[fastapi-problem](https://pypi.org/project/fastapi-problem)
+
 ## Custom Errors
 
 Subclassing the convenience classes provides a simple way to consistently raise
