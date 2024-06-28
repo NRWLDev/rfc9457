@@ -1,5 +1,7 @@
 # Changelog
 
+## v0.0.11 - 2024-06-28
+
 ## v0.0.10 - 2024-05-31
 
 ### Features and Improvements
