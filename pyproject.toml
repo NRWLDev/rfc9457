@@ -14,7 +14,7 @@ multidict = "*"
 
 [tool.poetry.dev-dependencies]
 
-changelog-gen = { version="^0.9", extras=["bump-my-version"]}
+changelog-gen = "^0.10"
 pytest = "~7.4.3"
 pytest-cov = "^4.1.0"
 pytest-random-order = "^1.0"
