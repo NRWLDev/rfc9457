@@ -14,7 +14,7 @@ multidict = "*"
 
 [tool.poetry.dev-dependencies]
 
-changelog-gen = "^0.10"
+changelog-gen = "^0.11"
 pytest = "~7.4.3"
 pytest-cov = "^4.1.0"
 pytest-random-order = "^1.0"
@@ -23,19 +23,8 @@ pytest-random-order = "^1.0"
 ruff = "^0.3"
 pre-commit = "^3.0.2"
 
-[tool.bumpversion]
-current_version = "0.0.11"
-commit = true
-tag = true
-
-[[tool.bumpversion.files]]
-filename = "pyproject.toml"
-search = 'version = "{current_version}"'
-replace = 'version = "{new_version}"'
-
 [tool.changelog_gen]
-release = true
-commit = true
+current_version = "0.0.11"
 reject_empty = true
 allowed_branches = [
     "main",
@@ -43,6 +32,10 @@ allowed_branches = [
 date_format = "- %Y-%m-%d"
 issue_link = "https://github.com/NRWLDev/rfc9457/issues/::issue_ref::"
 commit_link = "https://github.com/NRWLDev/rfc9457/commit/::commit_hash::"
+
+[[tool.changelog_gen.files]]
+filename = "pyproject.toml"
+pattern = 'version = "{version}"'
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
