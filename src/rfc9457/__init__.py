@@ -32,14 +32,14 @@ class Problem(Exception):  # noqa: N818
         self: t.Self,
         title: str,
         type_: str | None = None,
-        details: str | None = None,
+        detail: str | None = None,
         status: int = 500,
         headers: CIMultiDict[str, str] | None = None,
         **kwargs,
     ) -> None:
         self._type = type_
         self.title = title
-        self.details = details
+        self.detail = detail
         self.status = status
         self.status_code = status  # work around for sentry integrations that expect status_code attr
         self.headers = headers
@@ -49,7 +49,7 @@ class Problem(Exception):  # noqa: N818
         return self.title
 
     def __repr__(self: t.Self) -> str:
-        return f"{self.__class__.__name__}<title={self.title}; details={self.details}>"
+        return f"{self.__class__.__name__}<title={self.title}; detail={self.detail}>"
 
     @property
     def type(self: t.Self) -> str:
@@ -71,8 +71,8 @@ class Problem(Exception):  # noqa: N818
             "status": self.status,
         }
 
-        if self.details:
-            ret["details"] = self.details
+        if self.detail:
+            ret["detail"] = self.detail
 
         for k, v in self.extras.items():
             ret[k] = v
@@ -92,7 +92,7 @@ class StatusProblem(Problem):
 
     def __init__(
         self: t.Self,
-        details: str | None = None,
+        detail: str | None = None,
         headers: CIMultiDict[str, str] | None = None,
         **kwargs,
     ) -> None:
@@ -103,7 +103,7 @@ class StatusProblem(Problem):
         super().__init__(
             self.title,
             type_=self.type_ or self.code,
-            details=details,
+            detail=detail,
             status=self.status,
             headers=headers_ or None,
             **kwargs,
@@ -119,13 +119,13 @@ class RedirectProblem(StatusProblem):
     def __init__(
         self: t.Self,
         location: str,
-        details: str | None = None,
+        detail: str | None = None,
         headers: CIMultiDict[str, str] | None = None,
         **kwargs,
     ) -> None:
         headers_ = CIMultiDict(Location=location)
         headers_.update(headers or {})
-        super().__init__(details=details, headers=headers_, **kwargs)
+        super().__init__(detail=detail, headers=headers_, **kwargs)
 
 
 class BadRequestProblem(StatusProblem):

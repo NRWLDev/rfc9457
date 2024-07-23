@@ -32,23 +32,23 @@ class ServerExceptionError(error.ServerProblem):
     ],
 )
 def test_marshal(exc, type_):
-    e = exc("details")
+    e = exc("detail")
 
     assert e.marshal() == {
         "type": type_,
         "title": e.title,
-        "details": "details",
+        "detail": "detail",
         "status": e.status,
     }
 
 
 def test_marshal_with_base_url():
-    e = NotFoundError("details")
+    e = NotFoundError("detail")
 
     assert e.marshal(type_base_url="https://my-docs/errors/") == {
         "type": "https://my-docs/errors/not-found",
         "title": "a 404 message",
-        "details": "details",
+        "detail": "detail",
         "status": 404,
     }
 
@@ -63,7 +63,7 @@ def test_marshal_with_base_url():
     ],
 )
 def test_str(exc):
-    e = exc("details")
+    e = exc("detail")
 
     assert str(e) == e.title
 
@@ -78,9 +78,9 @@ def test_str(exc):
     ],
 )
 def test_repr(exc):
-    e = exc("details")
+    e = exc("detail")
 
-    assert repr(e) == f"{exc.__name__}<title={e.title}; details=details>"
+    assert repr(e) == f"{exc.__name__}<title={e.title}; detail=detail>"
 
 
 def test_marshal_with_extras():
@@ -96,7 +96,7 @@ def test_marshal_with_extras():
 
 
 def test_marshal_strip_debug():
-    e = NotFoundError(details="details", key1="value1", key2=["value2", "value3"])
+    e = NotFoundError(detail="detail", key1="value1", key2=["value2", "value3"])
 
     assert e.marshal(strip_debug=True) == {
         "type": "not-found",
@@ -110,25 +110,25 @@ class HeaderError(error.BadRequestProblem):
 
 
 def test_pass_in_headers():
-    e = NotFoundError(details="details", headers={"header1": "value1", "header2": "value2"})
+    e = NotFoundError(detail="detail", headers={"header1": "value1", "header2": "value2"})
 
     assert e.headers == {"header1": "value1", "header2": "value2"}
 
 
 def test_builtin_headers():
-    e = HeaderError(details="details")
+    e = HeaderError(detail="detail")
 
     assert e.headers == {"header1": "value1"}
 
 
 def test_augment_headers():
-    e = HeaderError(details="details", headers={"header2": "value2"})
+    e = HeaderError(detail="detail", headers={"header2": "value2"})
 
     assert e.headers == {"header1": "value1", "header2": "value2"}
 
 
 def test_replace_headers():
-    e = HeaderError(details="details", headers={"header1": "value2"})
+    e = HeaderError(detail="detail", headers={"header1": "value2"})
 
     assert e.headers == {"header1": "value2"}
 
@@ -137,7 +137,7 @@ def test_redirect_location():
     class CustomRedirect(error.RedirectProblem):
         title = "Moved"
 
-    e = CustomRedirect("new-location", "details")
+    e = CustomRedirect("new-location", "detail")
 
     assert e.headers == CIMultiDict(Location="new-location")
 
@@ -146,6 +146,6 @@ def test_redirect_location_headers_override():
     class CustomRedirect(error.RedirectProblem):
         title = "Moved"
 
-    e = CustomRedirect("new-location", "details", headers={"location": "my-location"})
+    e = CustomRedirect("new-location", "detail", headers={"location": "my-location"})
 
     assert e.headers == CIMultiDict(location="my-location")
