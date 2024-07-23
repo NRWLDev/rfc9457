@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.1.0 - 2024-07-23
+
+### Bug fixes
+
+- **Breaking:** Correctly match the RFC9457 spec with detail not details. [[#8](https://github.com/NRWLDev/rfc9457/issues/8)] [[59a3325](https://github.com/NRWLDev/rfc9457/commit/59a33254386ec677209945871f0182914c403dd7)]
+
+### Miscellaneous
+
+- Update changelog-gen dependency [[b4a897f](https://github.com/NRWLDev/rfc9457/commit/b4a897fbaaf6da55e181485ea294fdc62adf1b06)]
+
 ## v0.0.11 - 2024-06-28
 
 - Update README with details of libraries making use of code.
