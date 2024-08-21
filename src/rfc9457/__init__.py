@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import re
 import typing as t
+from warnings import warn
 
 from multidict import CIMultiDict
 
@@ -44,6 +45,10 @@ class Problem(Exception):  # noqa: N818
         self.status_code = status  # work around for sentry integrations that expect status_code attr
         self.headers = headers
         self.extras = kwargs
+        bad_extras = {k for k in self.extras if k in {"type", "status", "title", "detail"} or not k.strip()}
+        if len(bad_extras) > 0:
+            _msg = f"Illegal extra keys: {bad_extras}"
+            raise ValueError(_msg)
 
     def __str__(self: t.Self) -> str:
         return self.title
@@ -53,34 +58,35 @@ class Problem(Exception):  # noqa: N818
 
     @property
     def type(self: t.Self) -> str:
-        type_ = error_class_to_type(self)
-        return self._type if self._type else type_
+        return self._type if self._type else error_class_to_type(self)
 
-    def marshal(self: t.Self, type_base_url: str | None = None, *, strip_debug: bool = False) -> dict[str, t.Any]:
+    def marshal(
+        self: t.Self,
+        type_base_url: str | None = None,
+        *,
+        uri: str = "",
+        strip_debug: bool = False,
+    ) -> dict[str, t.Any]:
         """Generate a JSON compatible representation.
 
         Args:
         ----
-            type_base_url: If provided prepend to the type to generate a full url.
+            type_base_url: If provided prepend to the type to generate a full url. (DEPRECATED; use uri instead)
+            uri: URI / URI template to use as the type; will substitute '{status}', '{title}', and '{type}'
             strip_debug: If true, remove anything that is not title/type.
         """
-        type_ = f"{type_base_url or ''}{self.type}"
-        ret = {
-            "type": type_,
+        typ = self.type
+        if type_base_url
+            typ = f"{type_base_url or ''}{self.type}"
+            warn("Using deprecated parameter 'type_base_url'", DeprecationWarning)
+        typ = uri.replace("{status}", self.status).replace("{title}", self.title).replace("{type}", self.type) or self.type
+        return {
+            "type": typ,
             "title": self.title,
             "status": self.status,
+            **{k: v for k, v in self.extras.items() if k in self.__mandatory__ or not strip_debug},
+            **{"detail": d for d in [detail] if d and ("detail" in self.__mandatory__ or not strip_debug)},
         }
-
-        if self.detail:
-            ret["detail"] = self.detail
-
-        for k, v in self.extras.items():
-            ret[k] = v
-
-        if strip_debug:
-            ret = {k: v for k, v in ret.items() if k in self.__mandatory__}
-
-        return ret
 
 
 class StatusProblem(Problem):
