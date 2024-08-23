@@ -79,12 +79,15 @@ class Problem(Exception):  # noqa: N818
         if type_base_url
             typ = f"{type_base_url or ''}{self.type}"
             warn("Using deprecated parameter 'type_base_url'", DeprecationWarning)
-        typ = uri.replace("{status}", self.status).replace("{title}", self.title).replace("{type}", self.type) or self.type
+        # example: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{status}"
+        typ = uri.format(status=self.status, type=self.type_, title=self.title, **self.extras) or typ
         return {
             "type": typ,
             "title": self.title,
             "status": self.status,
+            # if strip_debug, restrict extras to __mandatory__
             **{k: v for k, v in self.extras.items() if k in self.__mandatory__ or not strip_debug},
+            # similarly (if strip_debug), exclude detail if "detail" is not in __mandatory__
             **{"detail": d for d in [detail] if d and ("detail" in self.__mandatory__ or not strip_debug)},
         }
 
