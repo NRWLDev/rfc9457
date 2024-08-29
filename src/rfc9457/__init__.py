@@ -45,10 +45,11 @@ class Problem(Exception):  # noqa: N818
         self.status_code = status  # work around for sentry integrations that expect status_code attr
         self.headers = headers
         self.extras = kwargs
-        bad_extras = {k for k in self.extras if k in {"type", "status", "title", "detail"} or not k.strip()}
+
+        bad_extras = {k for k in self.extras if k in {"type"} or not k.strip()}
         if len(bad_extras) > 0:
-            _msg = f"Illegal extra keys: {bad_extras}"
-            raise ValueError(_msg)
+            msg = f"Illegal extra keys: {bad_extras}"
+            raise ValueError(msg)
 
     def __str__(self: t.Self) -> str:
         return self.title
@@ -69,26 +70,35 @@ class Problem(Exception):  # noqa: N818
     ) -> dict[str, t.Any]:
         """Generate a JSON compatible representation.
 
+        Provide a uri template to expand internal parameters into a full type uri
+        Example: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{status}"
+
         Args:
         ----
             type_base_url: If provided prepend to the type to generate a full url. (DEPRECATED; use uri instead)
-            uri: URI / URI template to use as the type; will substitute '{status}', '{title}', and '{type}'
+            uri: URI / URI template to use as the type; will substitute '{status}', '{title}', '{type}', and **extras.
             strip_debug: If true, remove anything that is not title/type.
         """
-        typ = self.type
-        if type_base_url
-            typ = f"{type_base_url or ''}{self.type}"
-            warn("Using deprecated parameter 'type_base_url'", DeprecationWarning)
-        # example: "https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{status}"
-        typ = uri.format(status=self.status, type=self.type_, title=self.title, **self.extras) or typ
+        type_ = self.type
+        if type_base_url:
+            type_ = f"{type_base_url or ''}{self.type}"
+            warn(
+                "Using deprecated parameter 'type_base_url'",
+                FutureWarning,
+                stacklevel=2,
+            )
+        type_ = uri.format(status=self.status, type=self.type, title=self.title, **self.extras) or type_
+
+        optional = self.extras.copy()
+        if self.detail:
+            optional["detail"] = self.detail
+
         return {
-            "type": typ,
+            "type": type_,
             "title": self.title,
             "status": self.status,
-            # if strip_debug, restrict extras to __mandatory__
-            **{k: v for k, v in self.extras.items() if k in self.__mandatory__ or not strip_debug},
-            # similarly (if strip_debug), exclude detail if "detail" is not in __mandatory__
-            **{"detail": d for d in [detail] if d and ("detail" in self.__mandatory__ or not strip_debug)},
+            # if strip_debug, restrict optional extras to __mandatory__
+            **{k: v for k, v in optional.items() if k in self.__mandatory__ or not strip_debug},
         }
 
 
