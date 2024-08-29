@@ -67,6 +67,7 @@ class Problem(Exception):  # noqa: N818
         *,
         uri: str = "",
         strip_debug: bool = False,
+        strict: bool = False,
     ) -> dict[str, t.Any]:
         """Generate a JSON compatible representation.
 
@@ -78,6 +79,7 @@ class Problem(Exception):  # noqa: N818
             type_base_url: If provided prepend to the type to generate a full url. (DEPRECATED; use uri instead)
             uri: URI / URI template to use as the type; will substitute '{status}', '{title}', '{type}', and **extras.
             strip_debug: If true, remove anything that is not title/type.
+            strict: If true, enforce type as a uri, and treat unset types as 'about:blank'.
         """
         type_ = self.type
         if type_base_url:
@@ -87,7 +89,16 @@ class Problem(Exception):  # noqa: N818
                 FutureWarning,
                 stacklevel=2,
             )
-        type_ = uri.format(status=self.status, type=self.type, title=self.title, **self.extras) or type_
+
+        if strict and not uri:
+            msg = "Strict mode requires a uri template."
+            raise ValueError(msg)
+
+        if strict and not self._type:
+            type_ = "about:blank"
+
+        elif uri:
+            type_ = uri.format(status=self.status, type=self.type, title=self.title, **self.extras)
 
         optional = self.extras.copy()
         if self.detail:
