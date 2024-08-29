@@ -53,6 +53,17 @@ def test_marshal_with_base_url():
     }
 
 
+def test_marshal_with_uri():
+    e = NotFoundError("detail")
+
+    assert e.marshal(uri="https://my-docs/errors/{status}/{type}") == {
+        "type": "https://my-docs/errors/404/not-found",
+        "title": "a 404 message",
+        "detail": "detail",
+        "status": 404,
+    }
+
+
 @pytest.mark.parametrize(
     "exc",
     [
@@ -81,6 +92,18 @@ def test_repr(exc):
     e = exc("detail")
 
     assert repr(e) == f"{exc.__name__}<title={e.title}; detail=detail>"
+
+
+@pytest.mark.parametrize(
+    "extra",
+    [
+        " ",
+        "type",
+    ],
+)
+def test_init_with_bad_extras(extra):
+    with pytest.raises(ValueError, match=f"Illegal extra keys: {{'{extra}'}}"):
+        NotFoundError(**{extra: "value"})
 
 
 def test_marshal_with_extras():
