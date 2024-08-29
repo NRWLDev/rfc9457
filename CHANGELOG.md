@@ -1,5 +1,16 @@
 # Changelog
 
+## v0.1.1 - 2024-08-29
+
+### Features and Improvements
+
+- Add `strict` mode for marshal, enforce use of uri and default to `about:blank` for type. [[#11](https://github.com/NRWLDev/rfc9457/issues/11)] [[2f7420b](https://github.com/NRWLDev/rfc9457/commit/2f7420bfbbdfd7e9a05988eb9dbdc174b8add6f6)]
+- Add `uri` param to `marshall` and deprecate `type_base_url`. [[#6](https://github.com/NRWLDev/rfc9457/issues/6)] [[eef42ea](https://github.com/NRWLDev/rfc9457/commit/eef42eac3b09d3782de27a280bd7f7f2b7645e1f)] [@dmyersturnbull](https://github.com/dmyersturnbull)
+
+### Miscellaneous
+
+- Update changelog dependency [[92faf65](https://github.com/NRWLDev/rfc9457/commit/92faf657f7e9b1f5ca0aa7ff31054e58752f1c0f)]
+
 ## v0.1.0 - 2024-07-23
 
 ### Bug fixes
