@@ -81,9 +81,9 @@ class Problem(Exception):  # noqa: N818
         """
         type_ = self.type
         if type_base_url:
-            type_ = f"{type_base_url or ''}{self.type}"
+            type_ = f"{type_base_url}{self.type}"
             warn(
-                "Using deprecated parameter 'type_base_url'",
+                "Using deprecated parameter 'type_base_url', switch to 'uri'",
                 FutureWarning,
                 stacklevel=2,
             )
