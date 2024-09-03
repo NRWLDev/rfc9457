@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.2.0 - 2024-09-03
+
+### Features and Improvements
+
+- **Breaking** Remove type_base_url support. [[c66c0c1](https://github.com/NRWLDev/rfc9457/commit/c66c0c188a9644fa93c0a8cd49a0db20b95e2646)]
+
+### Miscellaneous
+
+- Update changelog and associated configuration [[673ee7f](https://github.com/NRWLDev/rfc9457/commit/673ee7f28e34958b1e9cddf32421a4ffbf7b3598)]
+
 ## v0.1.1 - 2024-08-29
 
 ### Features and Improvements
