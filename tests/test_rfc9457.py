@@ -46,7 +46,7 @@ def test_marshal_strict_requires_uri():
     e = NotFoundError("detail")
 
     with pytest.raises(ValueError, match="Strict mode requires a uri template."):
-        e.marshal(type_base_url="https://my-docs/errors/", strict=True)
+        e.marshal(strict=True)
 
 
 def test_marshal_strict_defaults_type_to_aboutblank():
@@ -57,17 +57,6 @@ def test_marshal_strict_defaults_type_to_aboutblank():
         "title": e.title,
         "detail": "detail",
         "status": e.status,
-    }
-
-
-def test_marshal_with_base_url():
-    e = NotFoundError("detail")
-
-    assert e.marshal(type_base_url="https://my-docs/errors/") == {
-        "type": "https://my-docs/errors/not-found",
-        "title": "a 404 message",
-        "detail": "detail",
-        "status": 404,
     }
 
 

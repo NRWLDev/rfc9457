@@ -7,7 +7,6 @@ from __future__ import annotations
 
 import re
 import typing as t
-from warnings import warn
 
 from multidict import CIMultiDict
 
@@ -63,7 +62,6 @@ class Problem(Exception):  # noqa: N818
 
     def marshal(
         self: t.Self,
-        type_base_url: str | None = None,
         *,
         uri: str = "",
         strip_debug: bool = False,
@@ -81,24 +79,17 @@ class Problem(Exception):  # noqa: N818
             strip_debug: If true, remove anything that is not title/type.
             strict: If true, enforce type as a uri, and treat unset types as 'about:blank'.
         """
-        type_ = self.type
-        if type_base_url:
-            type_ = f"{type_base_url}{self.type}"
-            warn(
-                "Using deprecated parameter 'type_base_url', switch to 'uri'",
-                FutureWarning,
-                stacklevel=2,
-            )
-
         if strict and not uri:
             msg = "Strict mode requires a uri template."
             raise ValueError(msg)
 
+        # Default to type as uri if not strict, and not supplied
+        uri = uri or "{type}"
+
+        type_ = uri.format(status=self.status, type=self.type, title=self.title, **self.extras)
+
         if strict and not self._type:
             type_ = "about:blank"
-
-        elif uri:
-            type_ = uri.format(status=self.status, type=self.type, title=self.title, **self.extras)
 
         optional = self.extras.copy()
         if self.detail:
