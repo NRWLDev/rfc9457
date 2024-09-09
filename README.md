@@ -1,4 +1,6 @@
 # RFC9457 implementation for Python
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
+[![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![image](https://img.shields.io/pypi/v/rfc9457.svg)](https://pypi.org/project/rfc9457/)
 [![image](https://img.shields.io/pypi/l/rfc9457.svg)](https://pypi.org/project/rfc9457/)
 [![image](https://img.shields.io/pypi/pyversions/rfc9457.svg)](https://pypi.org/project/rfc9457/)
