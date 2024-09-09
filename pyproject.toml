@@ -1,4 +1,4 @@
-[tool.poetry]
+[project]
 name = "rfc9457"
 version = "0.2.0"
 description = "Implementation of RFC9457 problems."
@@ -7,21 +7,21 @@ license = "Apache-2.0"
 repository="https://github.com/NRWLDev/rfc9457/"
 homepage="https://github.com/NRWLDev/rfc9457/"
 readme = "README.md"
+requires-python = ">=3.9"
 
-[tool.poetry.dependencies]
-python = "^3.9"
-multidict = "*"
+dependencies = [
+    "multidict == 6.0.5",
+]
 
-[tool.poetry.dev-dependencies]
-
-changelog-gen = "^0.12"
-pytest = "~7.4.3"
-pytest-cov = "^4.1.0"
-pytest-random-order = "^1.0"
-
-# Style
-ruff = "^0.3"
-pre-commit = "^3.0.2"
+[project.optional-dependencies]
+dev = [
+    "changelog-gen >= 0.12.0",
+    "pytest >= 7.4.4",
+    "pytest-cov >= 4.1.0",
+    "pytest-random-order >= 1.1.1",
+    "ruff >= 0.6.4",
+    "pre-commit >= 3.7.1",
+]
 
 [tool.changelog_gen]
 current_version = "0.2.0"
@@ -98,7 +98,3 @@ docstring-quotes = "double"
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
