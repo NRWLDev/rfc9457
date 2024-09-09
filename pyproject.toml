@@ -3,7 +3,7 @@ name = "rfc9457"
 version = "0.2.1"
 description = "Implementation of RFC9457 problems."
 authors = [
-    {author = "Daniel Edgecombe", email = "daniel@nrwl.co"},
+    {name = "Daniel Edgecombe", email = "daniel@nrwl.co"},
 ]
 license = "Apache-2.0"
 repository="https://github.com/NRWLDev/rfc9457/"
