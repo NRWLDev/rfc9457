@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.2.2 - 2024-09-09
+
+### Miscellaneous
+
+- Add classifiers to package metadata [[b05f824](https://github.com/NRWLDev/rfc9457/commit/b05f8243e6a72b0fda3bd33655b1a9c6006905b6)]
+
 ## v0.2.1 - 2024-09-09
 
 ### Features and Improvements
