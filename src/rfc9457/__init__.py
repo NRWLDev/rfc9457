@@ -28,7 +28,7 @@ class Problem(Exception):  # noqa: N818
 
     __mandatory__ = ("type", "title", "status")
 
-    def __init__(  # noqa: PLR0913
+    def __init__(
         self: t.Self,
         title: str,
         type_: str | None = None,
