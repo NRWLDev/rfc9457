@@ -479,7 +479,7 @@ wheels = [
 [[package]]
 name = "rfc9457"
 version = "0.2.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "multidict" },
 ]

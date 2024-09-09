@@ -2,7 +2,9 @@
 name = "rfc9457"
 version = "0.2.0"
 description = "Implementation of RFC9457 problems."
-authors = ["Daniel Edgecombe <daniel@nrwl.co>"]
+authors = [
+    {author = "Daniel Edgecombe", email = "daniel@nrwl.co"},
+]
 license = "Apache-2.0"
 repository="https://github.com/NRWLDev/rfc9457/"
 homepage="https://github.com/NRWLDev/rfc9457/"
@@ -98,3 +100,7 @@ docstring-quotes = "double"
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
