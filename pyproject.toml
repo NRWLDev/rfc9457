@@ -1,6 +1,6 @@
 [project]
 name = "rfc9457"
-version = "0.2.2"
+version = "0.2.3"
 description = "Implementation of RFC9457 problems."
 authors = [
     {name = "Daniel Edgecombe", email = "daniel@nrwl.co"},
@@ -44,7 +44,7 @@ dev = [
 ]
 
 [tool.changelog_gen]
-current_version = "0.2.2"
+current_version = "0.2.3"
 reject_empty = true
 allowed_branches = [
     "main",

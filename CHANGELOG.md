@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.2.3 - 2024-10-01
+
+### Miscellaneous
+
+- Add in deprecation warning for removal of strip_debug flag. [[15](https://github.com/NRWLDev/rfc9457/issues/15)] [[db72fe7](https://github.com/NRWLDev/rfc9457/commit/db72fe7c8b37280b5ed71b720d02ba017ef1bac9)]
+
 ## v0.2.2 - 2024-09-09
 
 ### Miscellaneous
