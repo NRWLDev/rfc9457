@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import re
 import typing as t
+from warnings import warn
 
 from multidict import CIMultiDict
 
@@ -26,6 +27,8 @@ class Problem(Exception):  # noqa: N818
     this will allow all apps and libraries to maintain a common exception chain.
     """
 
+    # TODO(EdgyEdgemond): Remove when strip_debug removed.
+    # https://github.com/NRWLDev/rfc9457/issues/15
     __mandatory__ = ("type", "title", "status")
 
     def __init__(
@@ -64,7 +67,7 @@ class Problem(Exception):  # noqa: N818
         self: t.Self,
         *,
         uri: str = "",
-        strip_debug: bool = False,
+        strip_debug: bool | None = None,
         strict: bool = False,
     ) -> dict[str, t.Any]:
         """Generate a JSON compatible representation.
@@ -74,11 +77,17 @@ class Problem(Exception):  # noqa: N818
 
         Args:
         ----
-            type_base_url: If provided prepend to the type to generate a full url. (DEPRECATED; use uri instead)
             uri: URI / URI template to use as the type; will substitute '{status}', '{title}', '{type}', and **extras.
-            strip_debug: If true, remove anything that is not title/type.
+            strip_debug: If true, remove anything that is not a mandatory field [Deprecated].
             strict: If true, enforce type as a uri, and treat unset types as 'about:blank'.
         """
+        if strip_debug is not None:
+            warn(
+                "Using deprecated parameter 'strip_debug', implement clean up client side.",
+                FutureWarning,
+                stacklevel=2,
+            )
+
         if strict and not uri:
             msg = "Strict mode requires a uri template."
             raise ValueError(msg)
