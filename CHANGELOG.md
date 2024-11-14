@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.0 - 2024-11-14
+
+### Bug fixes
+
+- **Breaking** Remove deprecated strip_debug flags. [[15](https://github.com/NRWLDev/rfc9457/issues/15)] [[6aad339](https://github.com/NRWLDev/rfc9457/commit/6aad339a510e275f8c47104c18511439f7c8439b)]
+
 ## v0.2.3 - 2024-10-01
 
 ### Miscellaneous
