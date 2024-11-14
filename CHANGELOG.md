@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.1 - 2024-11-14
+
+### Bug fixes
+
+- Restore optional fields to marshal. [[104b97a](https://github.com/NRWLDev/rfc9457/commit/104b97a79ca7c746655d6699f4961dad4a4da420)]
+
 ## v0.3.0 - 2024-11-14
 
 ### Bug fixes
