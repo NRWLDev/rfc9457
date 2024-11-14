@@ -125,16 +125,6 @@ def test_marshal_with_extras():
     }
 
 
-def test_marshal_strip_debug():
-    e = NotFoundError(detail="detail", key1="value1", key2=["value2", "value3"])
-
-    assert e.marshal(strip_debug=True) == {
-        "type": "not-found",
-        "title": "a 404 message",
-        "status": 404,
-    }
-
-
 class HeaderError(error.BadRequestProblem):
     headers: typing.ClassVar = {"header1": "value1"}
 

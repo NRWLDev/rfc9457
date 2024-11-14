@@ -94,6 +94,7 @@ class Problem(Exception):  # noqa: N818
             "type": type_,
             "title": self.title,
             "status": self.status,
+            **optional,
         }
 
 
