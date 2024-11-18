@@ -130,7 +130,7 @@ class HeaderError(error.BadRequestProblem):
 
 
 def test_pass_in_headers():
-    e = NotFoundError(detail="detail", headers={"header1": "value1", "header2": "value2"})
+    e = NotFoundError(detail="detail", headers=CIMultiDict(header1="value1", header2="value2"))
 
     assert e.headers == {"header1": "value1", "header2": "value2"}
 
@@ -142,13 +142,13 @@ def test_builtin_headers():
 
 
 def test_augment_headers():
-    e = HeaderError(detail="detail", headers={"header2": "value2"})
+    e = HeaderError(detail="detail", headers=CIMultiDict(header2="value2"))
 
     assert e.headers == {"header1": "value1", "header2": "value2"}
 
 
 def test_replace_headers():
-    e = HeaderError(detail="detail", headers={"header1": "value2"})
+    e = HeaderError(detail="detail", headers=CIMultiDict(header1="value2"))
 
     assert e.headers == {"header1": "value2"}
 
@@ -166,6 +166,6 @@ def test_redirect_location_headers_override():
     class CustomRedirect(error.RedirectProblem):
         title = "Moved"
 
-    e = CustomRedirect("new-location", "detail", headers={"location": "my-location"})
+    e = CustomRedirect("new-location", "detail", headers=CIMultiDict(location="my-location"))
 
     assert e.headers == CIMultiDict(location="my-location")

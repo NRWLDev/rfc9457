@@ -32,7 +32,7 @@ class Problem(Exception):  # noqa: N818
         type_: str | None = None,
         detail: str | None = None,
         status: int = 500,
-        headers: CIMultiDict[str, str] | None = None,
+        headers: CIMultiDict[str] | None = None,
         **kwargs,
     ) -> None:
         self._type = type_
@@ -103,15 +103,15 @@ class StatusProblem(Problem):
     type_: str | None = None
     title: str = "Base http exception."
     status: int = 500
-    headers: CIMultiDict[str, str] | None = None
+    headers_: CIMultiDict[str] | None = None
 
     def __init__(
         self: t.Self,
         detail: str | None = None,
-        headers: CIMultiDict[str, str] | None = None,
+        headers: CIMultiDict[str] | None = None,
         **kwargs,
     ) -> None:
-        headers_ = (self.headers or {}).copy()
+        headers_ = (self.headers or CIMultiDict()).copy()
         if headers:
             headers_.update(headers)
 
@@ -135,11 +135,11 @@ class RedirectProblem(StatusProblem):
         self: t.Self,
         location: str,
         detail: str | None = None,
-        headers: CIMultiDict[str, str] | None = None,
+        headers: CIMultiDict[str] | None = None,
         **kwargs,
     ) -> None:
         headers_ = CIMultiDict(Location=location)
-        headers_.update(headers or {})
+        headers_.update(headers or CIMultiDict())
         super().__init__(detail=detail, headers=headers_, **kwargs)
 
 
