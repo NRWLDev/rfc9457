@@ -111,7 +111,7 @@ class StatusProblem(Problem):
         headers: CIMultiDict[str] | None = None,
         **kwargs,
     ) -> None:
-        headers_ = (self.headers or CIMultiDict()).copy()
+        headers_ = (self.headers_ or CIMultiDict()).copy()
         if headers:
             headers_.update(headers)
 

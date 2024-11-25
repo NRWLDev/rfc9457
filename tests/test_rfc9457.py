@@ -1,5 +1,3 @@
-import typing
-
 import pytest
 from multidict import CIMultiDict
 
@@ -126,7 +124,7 @@ def test_marshal_with_extras():
 
 
 class HeaderError(error.BadRequestProblem):
-    headers: typing.ClassVar = {"header1": "value1"}
+    headers_ = CIMultiDict(header1="value1")
 
 
 def test_pass_in_headers():
