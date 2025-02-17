@@ -99,7 +99,6 @@ class Problem(Exception):  # noqa: N818
 
 
 class StatusProblem(Problem):
-    code: str | None = None
     type_: str | None = None
     title: str = "Base http exception."
     status: int = 500
@@ -117,7 +116,7 @@ class StatusProblem(Problem):
 
         super().__init__(
             self.title,
-            type_=self.type_ or self.code,
+            type_=self.type_,
             detail=detail,
             status=self.status,
             headers=headers_ or None,
