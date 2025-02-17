@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.2 - 2025-02-17
+
+### Bug fixes
+
+- Drop legacy code support. [[118ef18](https://github.com/NRWLDev/rfc9457/commit/118ef18fe39496c891e3e62d09ff43ddf2057237)]
+
 ## v0.3.1 - 2024-11-14
 
 ### Bug fixes
