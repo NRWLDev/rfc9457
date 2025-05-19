@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.4 - 2025-05-19
+
+### Features and Improvements
+
+- Add support for component and response generation in dependent libraries. [[17](https://github.com/NRWLDev/rfc9457/issues/17)] [[6f3bdfc](https://github.com/NRWLDev/rfc9457/commit/6f3bdfc05905e3355be567e1d99713ac3e5d4389)]
+
 ## v0.3.3 - 2025-05-05
 
 ### Bug fixes
