@@ -25,4 +25,4 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_PUBLISH_TOKEN }}
       run: |
         uv build
-        uvx twine upload dist/*
+        uv publish
