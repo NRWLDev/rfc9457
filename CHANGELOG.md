@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.5 - 2025-06-17
+
+### Miscellaneous
+
+- Replace twine with `uv publish`. [[d227421](https://github.com/NRWLDev/rfc9457/commit/d2274212ebd4902a87ec3772e8689b31c199642d)]
+
 ## v0.3.4 - 2025-05-19
 
 ### Features and Improvements
