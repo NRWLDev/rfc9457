@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.6 - 2025-06-17
+
+### Miscellaneous
+
+- Update workflow configuration for uv publish. [[5220f53](https://github.com/NRWLDev/rfc9457/commit/5220f5301e05b848eb3b20cf4422737a579969d1)]
+
 ## v0.3.5 - 2025-06-17
 
 ### Miscellaneous
