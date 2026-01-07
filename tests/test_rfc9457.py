@@ -43,7 +43,7 @@ def test_marshal(exc, type_):
 def test_marshal_strict_requires_uri():
     e = NotFoundError("detail")
 
-    with pytest.raises(ValueError, match="Strict mode requires a uri template."):
+    with pytest.raises(ValueError, match=r"Strict mode requires a uri template."):
         e.marshal(strict=True)
 
 

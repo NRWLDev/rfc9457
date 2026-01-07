@@ -7,7 +7,7 @@ authors = [
 ]
 license = "Apache-2.0"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 keywords = ["exception", "handler", "webdev"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -19,8 +19,6 @@ classifiers = [
     "Topic :: Utilities",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -96,7 +94,7 @@ source = ["src/rfc9457"]
 
 [tool.ruff]
 line-length = 120
-target-version = "py38"
+target-version = "py310"
 
 [tool.ruff.lint]
 select = ["ALL"]
