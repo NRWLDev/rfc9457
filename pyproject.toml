@@ -27,7 +27,7 @@ classifiers = [
 ]
 
 dependencies = [
-    "multidict >= 6.6.4",
+    "multidict >= 6.0.5",
 ]
 
 [project.urls]
