@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.4.0 - 2026-01-07
+
+### Features and Improvements
+
+- **Breaking** Drop support for py3.9, past EOL support. [[c76e08b](https://github.com/NRWLDev/rfc9457/commit/c76e08b96e2dc4fccc9c8f3acd0e47884afd7071)]
+- Lift restriction of multidict version [[f4c57b4](https://github.com/NRWLDev/rfc9457/commit/f4c57b4dd4e0eb992fb70fd8be98331838ac85b5)]
+
 ## v0.3.6 - 2025-06-17
 
 ### Miscellaneous
