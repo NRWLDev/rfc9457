@@ -7,7 +7,7 @@ authors = [
 ]
 license = "Apache-2.0"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 keywords = ["exception", "handler", "webdev"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -19,16 +19,15 @@ classifiers = [
     "Topic :: Utilities",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3",
 ]
 
 dependencies = [
-    "multidict == 6.0.5",
+    "multidict >= 6.6.4",
 ]
 
 [project.urls]
@@ -36,12 +35,12 @@ homepage="https://github.com/NRWLDev/rfc9457/"
 
 [project.optional-dependencies]
 dev = [
-    "changelog-gen >= 0.12.0",
-    "pytest >= 7.4.4",
-    "pytest-cov >= 4.1.0",
-    "pytest-random-order >= 1.1.1",
-    "ruff >= 0.6.4",
-    "pre-commit >= 3.7.1",
+    "changelog-gen >= 0.13.8",
+    "pytest >= 9.0.2",
+    "pytest-cov >= 7.0.0",
+    "pytest-random-order >= 1.2.0",
+    "ruff >= 0.14.10",
+    "pre-commit >= 4.5.1",
 ]
 
 [tool.changelog_gen]
@@ -74,9 +73,9 @@ link = "https://github.com/NRWLDev/rfc9457/commit/{0.commit_hash}"
 filename = "pyproject.toml"
 pattern = 'version = "{version}"'
 
-[tool.pytest.ini_options]
+[tool.pytest]
 testpaths = ["tests"]
-addopts = "--random-order"
+addopts = ["--random-order"]
 markers = [
     "backwards_compat: marks tests as part of backwards compatibility checks.",
 ]
