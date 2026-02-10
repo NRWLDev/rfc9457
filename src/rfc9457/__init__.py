@@ -10,6 +10,9 @@ import typing as t
 
 from multidict import CIMultiDict
 
+if t.TYPE_CHECKING:
+    from collections.abc import MutableMapping
+
 CONVERT_RE = re.compile(r"(?<!^)(?=[A-Z])")
 
 
@@ -27,12 +30,12 @@ class Problem(Exception):  # noqa: N818
     """
 
     def __init__(
-        self: t.Self,
+        self,
         title: str,
         type_: str | None = None,
         detail: str | None = None,
         status: int = 500,
-        headers: CIMultiDict[str] | None = None,
+        headers: MutableMapping[str, str] | None = None,
         **kwargs,
     ) -> None:
         self._type = type_
@@ -48,18 +51,18 @@ class Problem(Exception):  # noqa: N818
             msg = f"Illegal extra keys: {bad_extras}"
             raise ValueError(msg)
 
-    def __str__(self: t.Self) -> str:
+    def __str__(self) -> str:
         return self.title
 
-    def __repr__(self: t.Self) -> str:
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}<title={self.title}; detail={self.detail}>"
 
     @property
-    def type(self: t.Self) -> str:
+    def type(self) -> str:
         return self._type if self._type else error_class_to_type(self)
 
     def marshal(
-        self: t.Self,
+        self,
         *,
         uri: str = "",
         strict: bool = False,
@@ -102,12 +105,12 @@ class StatusProblem(Problem):
     type_: str | None = None
     title: str = "Base http exception."
     status: int = 500
-    headers_: CIMultiDict[str] | None = None
+    headers_: MutableMapping[str, str] | None = None
 
     def __init__(
-        self: t.Self,
+        self,
         detail: str | None = None,
-        headers: CIMultiDict[str] | None = None,
+        headers: MutableMapping[str, str] | None = None,
         **kwargs,
     ) -> None:
         headers_ = (self.headers_ or CIMultiDict()).copy()
@@ -131,10 +134,10 @@ class RedirectProblem(StatusProblem):
     status = 301
 
     def __init__(
-        self: t.Self,
+        self,
         location: str,
         detail: str | None = None,
-        headers: CIMultiDict[str] | None = None,
+        headers: MutableMapping[str, str] | None = None,
         **kwargs,
     ) -> None:
         headers_ = CIMultiDict(Location=location)
