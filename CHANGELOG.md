@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.4.1 - 2026-02-10
+
+### Miscellaneous
+
+- Simplify type hint restrictions. [[3627b19](https://github.com/NRWLDev/rfc9457/commit/3627b19d3024e30b68fb25fc91160b178d3dd422)]
+- Add latest python to test matrix [[ee21924](https://github.com/NRWLDev/rfc9457/commit/ee21924928bc07f3ea8c6096aaddecf2f7186b68)]
+
 ## v0.4.0 - 2026-01-07
 
 ### Features and Improvements
