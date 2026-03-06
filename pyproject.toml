@@ -42,6 +42,7 @@ dev = [
     "pytest-random-order >= 1.2.0",
     "ruff >= 0.14.10",
     "pre-commit >= 4.5.1",
+    "ty >= 0.0.17",
 ]
 
 [tool.changelog_gen]
@@ -119,6 +120,9 @@ docstring-quotes = "double"
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.ty.terminal]
+output-format = "concise"
 
 [build-system]
 requires = ["hatchling"]

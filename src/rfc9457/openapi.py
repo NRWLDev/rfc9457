@@ -14,7 +14,7 @@ def problem_response(description: str, examples: list[dict], component: str = "P
         }
         for ex in examples
     }
-    ret_val = {
+    ret_val: dict[str, str | dict[str, dict[str, Any]]] = {
         "description": description,
         "content": {
             "application/problem+json": {

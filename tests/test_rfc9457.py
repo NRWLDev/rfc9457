@@ -108,7 +108,7 @@ def test_repr(exc):
 )
 def test_init_with_bad_extras(extra):
     with pytest.raises(ValueError, match=f"Illegal extra keys: {{'{extra}'}}"):
-        NotFoundError(**{extra: "value"})
+        NotFoundError(**{extra: "value"})  # type: ignore[invalid-argument-type]
 
 
 def test_marshal_with_extras():

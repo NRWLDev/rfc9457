@@ -46,7 +46,7 @@ class Problem(Exception):  # noqa: N818
         self.headers = headers
         self.extras = kwargs
 
-        bad_extras = {k for k in self.extras if k in {"type"} or not k.strip()}
+        bad_extras = {k for k in self.extras if k == "type" or not k.strip()}
         if len(bad_extras) > 0:
             msg = f"Illegal extra keys: {bad_extras}"
             raise ValueError(msg)
@@ -59,7 +59,7 @@ class Problem(Exception):  # noqa: N818
 
     @property
     def type(self) -> str:
-        return self._type if self._type else error_class_to_type(self)
+        return self._type or error_class_to_type(self)
 
     def marshal(
         self,
@@ -113,7 +113,7 @@ class StatusProblem(Problem):
         headers: MutableMapping[str, str] | None = None,
         **kwargs,
     ) -> None:
-        headers_ = (self.headers_ or CIMultiDict()).copy()
+        headers_ = (self.headers_ or CIMultiDict()).copy()  # type: ignore[unresolved-attribute]
         if headers:
             headers_.update(headers)
 
